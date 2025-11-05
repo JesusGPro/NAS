@@ -69,7 +69,7 @@ ufw status
     a) sudo nano /etc/nginx/sites-available/testdjango
     server {
         listen 80;
-        server_name 172.31.126.24;
+        server_name xxxxxxx;
 
         location = /favicon.ico { access_log off; log_not_found off; }
         location /static/ {
