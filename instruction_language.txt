@@ -1,0 +1,6 @@
+sudo apt update
+sudo apt install gettext
+
+python manage.py makemessages -l es
+
+python manage.py compilemessages

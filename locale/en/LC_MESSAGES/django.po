@@ -1,0 +1,715 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-01 12:32+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: drives/templates/drives/disk_status.html:4
+msgid "Hard Drive Status"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:8
+msgid "System Disk Status"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:12
+#, python-format
+msgid ""
+"\n"
+"    Running on **%(os)s** (%(processor)s). This data reflects your current "
+"machine, simulating the data you'll fetch from your Raspberry Pi NAS.\n"
+"    "
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:20
+msgid "Detected Disk Partitions"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:26
+msgid "Device / Mount Point"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:27
+msgid "Total (GB)"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:28
+msgid "Used (GB)"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:29
+msgid "Free (GB)"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:30
+msgid "Usage"
+msgstr ""
+
+#: drives/templates/drives/disk_status.html:74
+msgid "No disk partitions could be detected or read."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:4
+#: drives/templates/drives/drive_content.html:4 templates/base.html:46
+msgid "Drive Content"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:9
+#: drives/templates/drives/drive_content.html:9
+msgid "File Explorer"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:15
+#: drives/templates/drives/drive_content.html:15
+msgid "Drives"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:21
+#: drives/templates/drives/drive_content.html:21
+msgid "..."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:35
+#: drives/templates/drives/drive_content.html:35
+msgid "Create Folder"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:38 copy.html:307
+#: drives/templates/drives/drive_content.html:38
+#: drives/templates/drives/drive_content.html:307
+msgid "Upload Folder"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:47
+#: drives/templates/drives/drive_content.html:47
+msgid "Paste Items Here"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:48
+#: drives/templates/drives/drive_content.html:48
+msgid "Paste"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:48
+#: drives/templates/drives/drive_content.html:48
+msgid "items"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:55
+#: drives/templates/drives/drive_content.html:55
+msgid "Upload File"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:70
+#: drives/templates/drives/drive_content.html:70
+msgid "Start Upload"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:74
+#: drives/templates/drives/drive_content.html:74
+msgid ""
+"Select a file and click 'Start Upload' to save it to the current directory."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:81
+#: drives/templates/drives/drive_content.html:81
+msgid ""
+"Permission denied: You do not have permission to upload files to this "
+"directory."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:94
+#: drives/templates/drives/drive_content.html:94
+msgid "Selected"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:95
+#: drives/templates/drives/drive_content.html:95
+msgid "Copy"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:96
+#: drives/templates/drives/drive_content.html:96
+msgid "Cut"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:97 copy.html:177
+#: drives/templates/drives/drive_content.html:97
+#: drives/templates/drives/drive_content.html:177
+msgid "Delete"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:100 copy.html:500
+#: drives/templates/drives/drive_content.html:100
+#: drives/templates/drives/drive_content.html:499
+msgid "items selected"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:112
+#: drives/templates/drives/drive_content.html:112
+msgid "Type"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:113
+#: drives/templates/drives/drive_content.html:113
+msgid "Name"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:114
+#: drives/templates/drives/drive_content.html:114
+msgid "Size"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:115
+#: drives/templates/drives/drive_content.html:115
+msgid "Last Modified"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:116
+#: drives/templates/drives/drive_content.html:116
+msgid "Actions"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:124
+#: drives/templates/drives/drive_content.html:124
+msgid "Parent Directory"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:159
+#: drives/templates/drives/drive_content.html:159
+msgid "Download"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:163
+#: drives/templates/drives/drive_content.html:163
+msgid "Download File"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:169 copy.html:247
+#: drives/templates/drives/drive_content.html:169
+#: drives/templates/drives/drive_content.html:247
+msgid "Rename"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:193
+#: drives/templates/drives/drive_content.html:193
+msgid "This folder is empty."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:210
+#: drives/templates/drives/drive_content.html:210
+msgid "Create New Folder"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:215
+#: drives/templates/drives/drive_content.html:215
+msgid "Folder Name"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:220 copy.html:246
+#: copy.html:269 copy.html:293 drives/templates/drives/drive_content.html:220
+#: drives/templates/drives/drive_content.html:246
+#: drives/templates/drives/drive_content.html:269
+#: drives/templates/drives/drive_content.html:293
+msgid "Cancel"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:221
+#: drives/templates/drives/drive_content.html:221
+msgid "Create"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:235
+#: drives/templates/drives/drive_content.html:235
+msgid "Rename Item"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:241
+#: drives/templates/drives/drive_content.html:241
+msgid "New Name"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:261
+#: drives/templates/drives/drive_content.html:261
+msgid "Confirm Deletion"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:265
+#: drives/templates/drives/drive_content.html:265
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:265
+#: drives/templates/drives/drive_content.html:265
+msgid "This action cannot be undone."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:266
+#: drives/templates/drives/drive_content.html:266
+msgid "Note: If this is a folder, all contents will be permanently removed."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:270 copy.html:295
+#: drives/templates/drives/drive_content.html:270
+#: drives/templates/drives/drive_content.html:295
+msgid "Delete Permanently"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:283
+#: drives/templates/drives/drive_content.html:283
+msgid "Confirm Bulk Deletion"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:287
+#: drives/templates/drives/drive_content.html:287
+msgid "Are you sure you want to delete the **"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:287
+#: drives/templates/drives/drive_content.html:287
+msgid " selected items?** This action cannot be undone."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:288
+#: drives/templates/drives/drive_content.html:288
+msgid "Note: Folders and their contents will be permanently removed."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:313 copy.html:365
+msgid "Drag and drop the entire folder here, or click to select the folder."
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:327
+#: drives/templates/drives/drive_content.html:324
+msgid "Uploaded Folder"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:331
+#: drives/templates/drives/drive_content.html:328
+msgid "Close"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:409
+#: drives/templates/drives/drive_content.html:406
+msgid "Complete"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:429
+#: drives/templates/drives/drive_content.html:428 drives/views copy.py:135
+#: drives/views.py:515
+msgid "Error"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:481
+#: drives/templates/drives/drive_content.html:480
+msgid "Folder"
+msgstr ""
+
+#: drives/templates/drives/drive_content copy.html:481
+#: drives/templates/drives/drive_content.html:480
+msgid "File"
+msgstr ""
+
+#: drives/templates/drives/drive_content.html:313
+msgid "Drag and drop the entire folder here."
+msgstr ""
+
+#: drives/templates/drives/drive_content.html:361
+msgid "Drag and drop files/folders here"
+msgstr ""
+
+#: drives/templates/drives/index.html:4
+msgid "Inside NAS"
+msgstr ""
+
+#: drives/templates/drives/index.html:47
+msgid "4x 1TB NAS Status"
+msgstr ""
+
+#: drives/templates/drives/index.html:74
+msgid "Previous"
+msgstr ""
+
+#: drives/templates/drives/index.html:78
+msgid "Next"
+msgstr ""
+
+#: drives/templates/drives/index.html:88
+msgid "Author"
+msgstr ""
+
+#: drives/templates/drives/index.html:88
+msgid "October 2025"
+msgstr ""
+
+#: drives/views copy.py:136 drives/views.py:516
+msgid "N/A"
+msgstr ""
+
+#: drives/views copy.py:139 drives/views.py:520 drives/views.py:671
+msgid "Root"
+msgstr ""
+
+#: drives/views copy.py:180 drives/views.py:585
+msgid "File not found"
+msgstr ""
+
+#: drives/views copy.py:182 drives/views.py:587
+msgid "Could not download file."
+msgstr ""
+
+#: drives/views copy.py:233 drives/views.py:657
+msgid "Permission denied to access this directory."
+msgstr ""
+
+#: drives/views copy.py:249 drives/views.py:679
+msgid "Path not found"
+msgstr ""
+
+#: drives/views copy.py:273 drives/views.py:715
+msgid "Invalid upload path: Attempted to upload outside the drive boundary."
+msgstr ""
+
+#: drives/views copy.py:284
+#, python-brace-format
+msgid "File '{uploaded_file.name}' uploaded successfully."
+msgstr ""
+
+#: drives/views copy.py:286
+#, python-brace-format
+msgid "Failed to save file: {e}"
+msgstr ""
+
+#: drives/views copy.py:291 drives/views.py:734
+msgid "Upload failed: Target directory is invalid or file is missing."
+msgstr ""
+
+#: drives/views copy.py:310 drives/views.py:753
+msgid "New name cannot be empty."
+msgstr ""
+
+#: drives/views copy.py:327 drives/views.py:772
+msgid "New name contains illegal characters (e.g., '..' or starts with '.')."
+msgstr ""
+
+#: drives/views copy.py:332 drives/views.py:775
+msgid "Target path is outside the allowed drive boundary."
+msgstr ""
+
+#: drives/views copy.py:336
+#, python-brace-format
+msgid "An item named '{new_name}' already exists in this location."
+msgstr ""
+
+#: drives/views copy.py:343
+#, python-brace-format
+msgid "Item successfully renamed from '{old_name}' to '{new_name}'."
+msgstr ""
+
+#: drives/views copy.py:345
+#, python-brace-format
+msgid "Failed to rename item: {e}"
+msgstr ""
+
+#: drives/views copy.py:371 drives/views.py:818
+msgid "Deletion of the root directory or outside boundary is not allowed."
+msgstr ""
+
+#: drives/views copy.py:380
+#, python-brace-format
+msgid "File '{item_name}' deleted successfully."
+msgstr ""
+
+#: drives/views copy.py:384
+#, python-brace-format
+msgid "Folder '{item_name}' and its contents deleted successfully."
+msgstr ""
+
+#: drives/views copy.py:386
+#, python-brace-format
+msgid ""
+"Item at '{decoded_target_path}' does not exist or is not a file/directory."
+msgstr ""
+
+#: drives/views copy.py:389
+#, python-brace-format
+msgid "Permission denied: Could not delete '{item_name}'."
+msgstr ""
+
+#: drives/views copy.py:391
+#, python-brace-format
+msgid "Failed to delete item: {e}"
+msgstr ""
+
+#: drives/views.py:111
+msgid "Invalid folder name."
+msgstr ""
+
+#: drives/views.py:116 drives/views.py:128
+msgid "Operation denied: Path traversal detected."
+msgstr ""
+
+#: drives/views.py:123
+msgid "Permission denied: You cannot create a folder in this location."
+msgstr ""
+
+#: drives/views.py:134
+#, python-format
+msgid "A folder named '%(name)s' already exists."
+msgstr ""
+
+#: drives/views.py:141
+#, python-format
+msgid "Folder '%(name)s' created successfully at: %(path)s"
+msgstr ""
+
+#: drives/views.py:145
+#, python-format
+msgid "Failed to create folder: %(e)s"
+msgstr ""
+
+#: drives/views.py:164
+msgid "Permission denied: You cannot download this folder."
+msgstr ""
+
+#: drives/views.py:171
+msgid "Invalid folder path or item does not exist."
+msgstr ""
+
+#: drives/views.py:203
+#, python-brace-format
+msgid "Failed to create or stream the download: {e}"
+msgstr ""
+
+#: drives/views.py:230
+msgid "Invalid or empty folder name provided."
+msgstr ""
+
+#: drives/views.py:240
+msgid "No files or folder selected for upload."
+msgstr ""
+
+#: drives/views.py:247
+msgid "Security boundary violation detected."
+msgstr ""
+
+#: drives/views.py:269
+msgid "Upload failed: No files found for processing."
+msgstr ""
+
+#: drives/views.py:276
+#, python-format
+msgid "Failed to create the root folder: %(e)s"
+msgstr ""
+
+#: drives/views.py:328
+#, python-format
+msgid ""
+"Folder '%(folder_name)s' created and %(count)s files uploaded successfully."
+msgstr ""
+
+#: drives/views.py:333
+#, python-format
+msgid ""
+"%(success_count)s files successfully uploaded to folder '%(folder_name)s', "
+"but %(fail_count)s failed."
+msgstr ""
+
+#: drives/views.py:339
+msgid "The upload operation failed for all selected files."
+msgstr ""
+
+#: drives/views.py:374
+msgid "Permission denied."
+msgstr ""
+
+#: drives/views.py:540
+msgid "Invalid path provided. Redirected to root."
+msgstr ""
+
+#: drives/views.py:552
+msgid "Access outside of the designated root directory is forbidden."
+msgstr ""
+
+#: drives/views.py:566
+msgid "Access denied: You do not have permission to view this content."
+msgstr ""
+
+#: drives/views.py:662
+#, python-format
+msgid "Error listing directory content: %(e)s"
+msgstr ""
+
+#: drives/views.py:709 drives/views.py:767 drives/views.py:813
+#: drives/views.py:872
+msgid "Permission denied: You cannot modify content in this location."
+msgstr ""
+
+#: drives/views.py:727
+#, python-format
+msgid "File '%(file_name)s' uploaded successfully."
+msgstr ""
+
+#: drives/views.py:730
+#, python-format
+msgid "Failed to save file: %(e)s"
+msgstr ""
+
+#: drives/views.py:779
+#, python-format
+msgid "An item named '%(new_name)s' already exists in this location."
+msgstr ""
+
+#: drives/views.py:787
+#, python-format
+msgid "Item successfully renamed from '%(old_name)s' to '%(new_name)s'."
+msgstr ""
+
+#: drives/views.py:790
+#, python-format
+msgid "Failed to rename item: %(e)s"
+msgstr ""
+
+#: drives/views.py:828
+#, python-format
+msgid "File '%(item_name)s' deleted successfully."
+msgstr ""
+
+#: drives/views.py:833
+#, python-format
+msgid "Folder '%(item_name)s' and its contents deleted successfully."
+msgstr ""
+
+#: drives/views.py:836
+#, python-format
+msgid "Item at '%(path)s' does not exist or is not a file/directory."
+msgstr ""
+
+#: drives/views.py:840
+#, python-format
+msgid "Permission denied: Could not delete '%(item_name)s'."
+msgstr ""
+
+#: drives/views.py:843
+#, python-format
+msgid "Failed to delete item: %(e)s"
+msgstr ""
+
+#: drives/views.py:862
+msgid "No items were selected for deletion."
+msgstr ""
+
+#: drives/views.py:907
+#, python-format
+msgid "Successfully deleted %(count)s item(s)."
+msgstr ""
+
+#: drives/views.py:911
+#, python-format
+msgid "Failed to delete the following items: %(names)s"
+msgstr ""
+
+#: drives/views.py:926
+msgid "No items were selected for copying."
+msgstr ""
+
+#: drives/views.py:936
+#, python-format
+msgid ""
+"Ready to copy %(count)s item(s). Navigate to the target folder and click "
+"Paste."
+msgstr ""
+
+#: drives/views.py:950
+msgid "No items were selected for cutting."
+msgstr ""
+
+#: drives/views.py:960
+#, python-format
+msgid ""
+"Ready to move %(count)s item(s). Navigate to the target folder and click "
+"Paste."
+msgstr ""
+
+#: drives/views.py:976
+msgid "No items were selected for paste operation or session expired."
+msgstr ""
+
+#: drives/views.py:989
+msgid "Permission denied: You cannot modify content in the target location."
+msgstr ""
+
+#: drives/views.py:1008
+#, python-format
+msgid "Skipped: Cannot move/copy '%(name)s' into itself or its sub-directory."
+msgstr ""
+
+#: drives/views.py:1019
+#, python-format
+msgid "Skipped: Item named '%(name)s' already exists in the target location."
+msgstr ""
+
+#: drives/views.py:1041
+msgid "copied"
+msgstr ""
+
+#: drives/views.py:1041
+msgid "moved"
+msgstr ""
+
+#: drives/views.py:1045
+#, python-format
+msgid "Successfully %(operation)s %(count)s item(s) to the new location."
+msgstr ""
+
+#: drives/views.py:1047
+#, python-format
+msgid ""
+"%(success_count)s item(s) successfully %(operation)s, but %(fail_count)s "
+"item(s) failed."
+msgstr ""
+
+#: drives/views.py:1049
+msgid "The operation failed for all selected items."
+msgstr ""
+
+#: nas_manager/settings.py:120
+msgid "English"
+msgstr ""
+
+#: nas_manager/settings.py:121
+msgid "Spanish"
+msgstr ""
+
+#: templates/base.html:8
+msgid "NAS Manager"
+msgstr ""
+
+#: templates/base.html:21
+msgid "My NAS"
+msgstr ""
+
+#: templates/base.html:41
+msgid "DisK Status"
+msgstr ""
+
+#: templates/base.html:51
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:57
+msgid "Login"
+msgstr ""

@@ -1,0 +1,89 @@
+1) Add a new user: adduser jesus2
+2) Add this user to sudo group: usermod -aG sudo jesus2
+3) Setup a firewall, ufw is the package comming with ubuntu: ufw app list
+Available applications:
+    OpenSSH
+ufw allow OpenSSH
+ufw enable
+ufw status
+4) Log into this user account: su jesus2
+5) sudo apt update
+6) Edit: nano /etc/environment, adding this line: export GNUTLS_CPUID_OVERRIDE=0X1
+7) sudo apt update
+8) sudo apt install python3-venv python3-dev libq-dev nginx curl
+9) create a virtual environment: python3 -m venv envtestdjango
+10) activate virtual environment: source envtestdjango/bin/activate
+11) pip install django
+12) create a django project: django-admin startproject testdjango
+13) view structure: ls -la
+14) cd testdjango
+15) create db tables: python manage.py migrate
+16) collect static files: 
+    a) mkdir static 
+    b) nano testdjango/settings.py
+    c) add:
+        import os
+        STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+        ALLOWED_HOSTS = ['*'] # update is not a good practice
+    d) python manage.py collectstatic
+17) disable the firewall: sudo ufw allow 8000
+18) python manage.py runserver 0.0.0.0:8000
+19) gunicorn configuration:
+    a) pip install gunicorn
+    b) test: gunicorn --bind 0.0.0.0:8000 testdjango.wsgi
+    c) sudo nano /etc/systemd/system/gunicorn.socket
+        [Unit]
+        Description=test django
+
+        [Socket]
+        ListenStream=/run/gunicorn.sock
+
+        [Install]
+        WantedBy=sockets.target
+    d) sudo nano /etc/systemd/system/gunicorn.service
+        [Unit]
+        Description=gunicorn daemon
+        Requires=gunicorn.socket
+        After=network.target
+
+        [Service]
+        User=jesus2
+        Group=www-data
+        WorkingDirectory=/home/jesus2/testdjango
+        ExecStart=/home/jesus2/envtestdjango/bin/gunicorn \
+                --access-logfile - \
+                --workers 3 \  # formula: cores*2 + 1
+                --bind unix:/run/gunicorn.sock \
+                testdjango.wsgi:applications
+        
+        [Install]
+        WantedBy=multi-user.target
+    e) Start our socket: sudo systemctl start gunicorn.socket
+    f) enable the socket: sudo systemctl enable gunicorn.socket
+    g) check: file /run/gunicorn.sock
+        we should see: /run/gunicorn.sock: socket
+    h) check status of systemctl: sudo sytemctl status gunicorn.service
+    i) enable but not activated, to activate: curl --unix-socket /run/gunicorn.sock localhost
+
+20) Config Nginx server
+    a) sudo nano /etc/nginx/sites-available/testdjango
+    server {
+        listen 80;
+        server_name 172.31.126.24;
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location /static/ {
+            root /home/jesus2/destdjango;
+        }
+    
+        location / {
+            include proxy_params;
+            proxy_pass http://unix:/run/gunicorn.sock;
+        }
+    }
+    b) Create assembling to the site directly: 
+    sudo ln -s /etc/nginx/sites-available/testdjango /etc/nginx/sites-enabled
+    c) test syntaxis: sudo nginx -t
+    d) restart the nginx server: sudo systemctl restart nginx
+
+21) enable firewall for port 8000: sudo ufw delete allow 8000

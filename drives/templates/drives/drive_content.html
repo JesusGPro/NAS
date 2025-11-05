@@ -1,0 +1,729 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}  
+{% block title %}{% trans "Drive Content" %}: /{{ current_path }}{% endblock %}
+
+{% block content %}
+<style>
+    .icon-double-size {
+    font-size: 2em !important; 
+    transition: font-size 0.3s ease-out; 
+}
+</style>
+
+<h1 class="mb-4">
+    <i class="fas fas-folder me-2"></i>💻 {% trans "File Explorer" %}
+</h1>
+
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'drives:drive_root' %}">{% trans "Drives" %}</a>
+        </li>
+        
+        {% if parent_path_encoded is not None %}
+            <li class="breadcrumb-item">
+                <a href="{% url 'drives:drive_content' path=parent_path_encoded %}">
+                    {% trans "..." %}
+                </a>
+            </li>
+        {% endif %}
+        
+        <li class="breadcrumb-item active" aria-current="page">
+            {{ current_folder_name }}
+        </li>
+    </ol>
+</nav>
+
+<div class="mb-3">
+    {% if can_modify %}
+    <button class="btn btn-info btn-sm me-2" type="button" data-bs-toggle="modal" data-bs-target="#createFolderModal">
+        <i class="fas fa-folder-plus me-2"></i> {% trans "Create Folder" %}
+    </button>
+    <button class="btn btn-success btn-sm me-2" type="button" data-bs-toggle="modal" data-bs-target="#uploadFolderModal">
+        <i class="fas fa-upload me-2"></i> {% trans "Upload Folder" %}
+    </button>
+    {% endif %}
+
+    {% if file_operation %}
+    {% with item_count=file_operation.source_items|length %}
+    <form method="POST" action="{% url 'drives:paste_item' %}" class="d-inline">
+        {% csrf_token %}
+        <input type="hidden" name="target_path" value="{{ current_path }}">
+        <button type="submit" class="btn {% if file_operation.type == 'copy' %}btn-success{% else %}btn-warning{% endif %} btn-sm me-2" title="{% trans 'Paste Items Here' %}">
+            <i class="fas fa-paste me-2"></i> {% trans "Paste" %} ({{ item_count }} {% trans "items" %})
+        </button>
+    </form>
+    {% endwith %}
+    {% endif %}
+
+    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#uploadCollapse" aria-expanded="false" aria-controls="uploadCollapse">
+        <i class="fas fa-upload me-2"></i> {% trans "Upload File" %}
+    </button>
+</div>
+
+
+<div class="collapse mb-4" id="uploadCollapse">
+    {% if can_modify %}
+    <div class="card card-body bg-light">
+        <form method="POST" action="{% url 'drives:upload_file' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="target_path" value="{{ current_path }}">
+
+            <div class="input-group">
+                <input type="file" class="form-control" id="fileInput" name="file_upload" required>
+                <button class="btn btn-success" type="submit">
+                    <i class="fas fa-arrow-up me-2"></i> {% trans "Start Upload" %}
+                </button>
+            </div>
+            <small class="form-text text-muted mt-2">
+                {% trans "Select a file and click 'Start Upload' to save it to the current directory." %}
+            </small>
+        </form>
+    </div>
+
+    {% else %}
+    <div class="alert alert-warning">
+        {% trans "Permission denied: You do not have permission to upload files to this directory." %}
+    </div>
+    {% endif %}
+</div>
+
+<form method="POST" id="bulkActionForm">
+{% csrf_token %}
+<input type="hidden" name="current_path" value="{{ current_path }}">
+
+<div class="card shadow-lg mb-2">
+    <div class="card-body p-2">
+        {% if can_modify %}
+        <div class="btn-group btn-group-sm" role="group">
+            <span class="btn btn-light me-2">🛠️ {% trans "Selected" %}:</span>
+            <button type="submit" formaction="{% url 'drives:bulk_copy_items' %}" class="btn btn-outline-dark" id="bulkCopyBtn" disabled><i class="fas fa-copy me-1"></i> {% trans "Copy" %}</button>
+            <button type="submit" formaction="{% url 'drives:bulk_cut_items' %}" class="btn btn-outline-dark" id="bulkCutBtn" disabled><i class="fas fa-cut me-1"></i> {% trans "Cut" %}</button>
+            <button type="button" class="btn btn-outline-danger" id="bulkDeleteBtn" disabled data-bs-toggle="modal" data-bs-target="#bulkDeleteModal"><i class="fas fa-trash me-1"></i> {% trans "Delete" %}</button>
+            <button id="bulkCompressBtn" class="btn btn-outline-dark" type="button" disabled data-bs-toggle="modal" data-bs-target="#bulkCompressModal"><i class="fas fa-file-archive me-2"></i> {% trans "Compress" %}</button>
+        </div>
+        {% endif %}
+        <span class="ms-3 text-muted" id="selectedCount">0 {% trans "items selected" %}</span>
+    </div>
+</div>
+
+<div class="card shadow-lg">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0 align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" style="width: 5%;">
+                        <input type="checkbox" id="selectAllCheckbox">
+                    </th> 
+                    <th scope="col" style="width: 5%;">{% trans "Type" %}</th>
+                    <th scope="col" style="width: 35%;">{% trans "Name" %}</th>
+                    <th scope="col" class="text-end" style="width: 10%;">{% trans "Size" %}</th>
+                    <th scope="col" class="text-end" style="width: 15%;">{% trans "Last Modified" %}</th>
+                    <th scope="col" class="text-center" style="width: 30%;">{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr class="table-secondary">
+                    <td colspan="6" class="p-2"> 
+                        <a href="{% url 'drives:drive_content' path=parent_path_encoded %}" class="btn btn-sm btn-link text-dark text-decoration-none">
+                            <i class="fas fa-level-up-alt me-2"></i> .. ({% trans "Parent Directory" %})
+                        </a>
+                    </td>
+                </tr>
+                
+
+                {% for item in items %}
+                <tr>
+                    <td>
+                        {% if item.can_modify %}
+                        <input type="checkbox" class="item-checkbox" name="selected_items" value="{{ item.path }}">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.is_dir %}
+                        <i class="fas fa-folder text-warning"></i>
+                        {% else %}
+                        <i class="fas fa-file text-info"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.is_dir %}
+                            <a href="{% url 'drives:drive_content' path=item.path %}" class="link-dark folder-link">
+                                <strong>{{ item.name }}</strong>
+                            </a>
+                        {% else %}
+                            {{ item.name }}
+                        {% endif %}
+                    </td>
+                    <td class="text-end">{{ item.size }}</td>
+                    <td class="text-end text-muted small">{{ item.last_modified }}</td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm" role="group">
+                            
+                            {% if item.is_dir %}
+                            <a href="{% url 'drives:download_folder' path=item.path %}" class="btn btn-outline-primary" title="{% trans 'Download' %} {{ item.name }}">
+                                <i class="fas fa-file-archive"></i>
+                            </a>
+                            {% else %}
+                            <a href="{% url 'drives:drive_content' path=item.path %}" class="btn btn-outline-primary" title="{% trans 'Download File' %} {{ item.name }}">
+                                <i class="fas fa-download"></i>
+                            </a>
+                            {% endif %}
+
+                            {% if item.can_modify %}
+                            <button type="button" class="btn btn-outline-secondary" title="{% trans 'Rename' %}"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#renameModal"
+                                data-item-path="{{ item.path }}"
+                                data-item-name="{{ item.name }}">
+                                <i class="fas fa-pen"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-outline-danger" title="{% trans 'Delete' %}"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteModal"
+                                data-item-path="{{ item.path }}"
+                                data-item-name="{{ item.name }}"
+                                data-is-dir="{{ item.is_dir|yesno:'True,False' }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#uncompressModal" data-zip-path="{{ item.path }}" data-zip-name="{{ item.name }}"><i class="fas fa-file-export me-2"></i> {% trans "Uncompress Here" %}</button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted p-5"> 
+                        <i class="fas fa-box-open fa-3x mb-3"></i>
+                        <p class="lead">{% trans "This folder is empty." %}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</form> 
+
+<div class="modal fade" id="createFolderModal" tabindex="-1" aria-labelledby="createFolderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{% url 'drives:create_folder' %}">
+                {% csrf_token %}
+                <input type="hidden" name="target_path" value="{{ current_path_encoded }}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createFolderModalLabel">{% trans "Create New Folder" %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="folderName" class="form-label">{% trans "Folder Name" %}</label>
+                        <input type="text" class="form-control" id="folderName" name="folder_name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="renameModal" tabindex="-1" aria-labelledby="renameModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{% url 'drives:rename_item' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="renameModalLabel">{% trans "Rename Item" %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="old_path" id="renameOldPath">
+                    <div class="mb-3">
+                        <label for="renameNewName" class="form-label">{% trans "New Name" %}</label>
+                        <input type="text" class="form-control" id="renameNewName" name="new_name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-primary">{% trans "Rename" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{% url 'drives:delete_item' %}">
+                {% csrf_token %}
+                <input type="hidden" name="target_path" id="deleteTargetPath">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel"><i class="fas fa-exclamation-triangle me-2"></i> {% trans "Confirm Deletion" %}</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{% trans "Are you sure you want to delete" %} **<span id="deleteItemName" class="fw-bold"></span>**? {% trans "This action cannot be undone." %}</p>
+                    <small class="form-text text-muted">{% trans "Note: If this is a folder, all contents will be permanently removed." %}</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-danger">{% trans "Delete Permanently" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="bulkDeleteModal" tabindex="-1" aria-labelledby="bulkDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="bulkDeleteForm" method="POST" action="{% url 'drives:bulk_delete_items' %}"> 
+                {% csrf_token %} 
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="bulkDeleteModalLabel"><i class="fas fa-exclamation-triangle me-2"></i> {% trans "Confirm Bulk Deletion" %}</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{% trans "Are you sure you want to delete the **" %}<span id="bulkDeleteCount" class="fw-bold"></span>{% trans " selected items?** This action cannot be undone." %}</p>
+                    <small class="form-text text-muted">{% trans "Note: Folders and their contents will be permanently removed." %}</small>
+                    <input type="hidden" name="items_ids" id="bulkDeleteItemIds"> 
+                    <input type="hidden" name="current_path" id="bulkDeleteCurrentPath">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-danger">
+                        {% trans "Delete Permanently" %}
+                    </button>
+                </div>
+            </form>
+            </div>
+    </div>
+</div>
+<!--------------------------------------Upload folder---------------------------------------------------------------------->
+<div class="modal fade" id="uploadFolderModal" tabindex="-1" aria-labelledby="uploadFolderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(255, 186, 0));">
+                <h4 class="modal-title" id="uploadFolderModalLabel">🧩{% trans "Upload Folder" %}</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div id="dropzone-area" class="dropzone modal-body">
+                <strong>
+                    <p class="dz-message">
+                        {% trans "Drag and drop the entire folder here." %} 
+                    </p>
+                </strong>
+                <div id="upload-progress-bar" class="progress mt-3" style="height: 25px; display: none;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+                         style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <span id="progress-text">0%</span>
+                    </div>
+                </div>
+                <input type="hidden" id="targetPathInput" value="{{ current_path_encoded }}">
+                
+                <input type="hidden" id="newFolderNameInput" value="{% trans 'Uploaded Folder' %}"> 
+            </div>
+
+            <div class="modal-footer" style="background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(255, 186, 0));">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+<!----------------------------------------------- Bulk Compress Modal ------------------------------------->
+<div class="modal fade" id="bulkCompressModal" tabindex="-1" aria-labelledby="bulkCompressModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{% url 'drives:compress_items' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bulkCompressModalLabel">{% trans "Confirm Compression" %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{% trans "Are you sure you want to compress the following" %}:</p>
+                    <p class="fw-bold"><span id="bulkCompressCount">0</span> {% trans "item(s)" %}?</p>
+                    <p>{% trans "A new .zip file will be created in the current directory." %}</p>
+                    
+                    <input type="hidden" name="current_path" id="bulkCompressCurrentPath">
+                    <input type="hidden" name="item_paths" id="bulkCompressItemIds">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-warning">{% trans "Compress" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!----------------------------------------------- Bulk Uncompress Modal ------------------------------------->
+<div class="modal fade" id="uncompressModal" tabindex="-1" aria-labelledby="uncompressModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{% url 'drives:uncompress_item' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uncompressModalLabel">{% trans "Confirm Uncompression" %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{% trans "Are you sure you want to extract the contents of" %} <span id="uncompressZipName" class="fw-bold"></span> {% trans "into the current directory?" %}</p>
+                    
+                    <input type="hidden" name="current_path" value="{{ current_path_encoded }}">
+                    <input type="hidden" name="zip_path" id="uncompressZipPath">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-success">{% trans "Uncompress" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // --- Dropzone Initialization Variables ---
+        Dropzone.autoDiscover = false; 
+
+        const targetPathInput = document.getElementById('targetPathInput');
+        
+        // Progress Bar Elements
+        const progressBarContainer = document.getElementById('upload-progress-bar');
+        const progressBar = progressBarContainer ? progressBarContainer.querySelector('.progress-bar') : null;
+        const progressText = progressBarContainer ? progressBarContainer.querySelector('#progress-text') : null;
+        
+        if (typeof Dropzone !== 'undefined' && targetPathInput) {
+            const targetPath = targetPathInput.value;
+            
+            const myDropzone = new Dropzone("#dropzone-area", {
+                url: "{% url 'drives:dropzone_upload' %}", 
+                paramName: "file",
+                addRemoveLinks: true,
+                chunking: false, 
+                maxFilesize: 256, 
+                parallelUploads: 5,
+                createImageThumbnails: false,
+                autoProcessQueue: true, 
+                dictDefaultMessage: "{% trans 'Drag and drop files/folders here' %}",
+                
+                init: function() {
+                    this.on("sending", function(file, xhr, formData) {
+                        formData.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+                        formData.append("target_path", targetPath);
+
+                        const fullPath = file.fullPath || file.webkitRelativePath || file.name;
+                        formData.append("relative_path", fullPath);
+
+                        if (progressBarContainer && progressBarContainer.style.display === 'none') {
+                             progressBarContainer.style.display = 'flex';
+                        }
+                    });
+
+                    this.on("totaluploadprogress", function(progress) {
+                        if (progressBar) {
+                            progressBar.style.width = progress + "%";
+                            progressBar.setAttribute('aria-valuenow', progress);
+                            if (progressText) {
+                                progressText.textContent = Math.round(progress) + "%";
+                            }
+                        }
+                    });
+
+                    this.on("queuecomplete", function() {
+                        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                            
+                            if (progressBar) {
+                                progressBar.style.width = "100%";
+                                progressBar.setAttribute('aria-valuenow', 100);
+                                progressBar.classList.remove('progress-bar-animated');
+                                if (progressText) {
+                                    progressText.textContent = "100% - {% trans 'Complete' %}";
+                                }
+                            }
+
+                            setTimeout(() => {
+                                window.location.href = "{% url 'drives:drive_content' path='' %}" + targetPath;
+                            }, 1000);
+                        }
+                    });
+
+                    this.on("error", function(file, message) {
+                        console.error("Dropzone Error:", file.name, message);
+                        
+                        if (progressBarContainer && progressBar) {
+                            progressBarContainer.style.display = 'flex';
+                            progressBar.classList.remove('progress-bar-animated', 'progress-bar-striped');
+                            progressBar.classList.add('bg-danger');
+                            progressBar.style.width = "100%";
+                            if (progressText) {
+                                progressText.textContent = "{% trans 'Error' %}";
+                            }
+                        }
+                    });
+
+                    const modalElement = document.getElementById('uploadFolderModal');
+                    if (modalElement) {
+                        modalElement.addEventListener('hidden.bs.modal', function () {
+                            myDropzone.removeAllFiles(true);
+                            progressBarContainer.style.display = 'none';
+                            progressBar.style.width = "0%";
+                            progressBar.classList.remove('bg-danger');
+                            progressBar.classList.add('progress-bar-animated', 'progress-bar-striped');
+                            if (progressText) {
+                                progressText.textContent = "0%";
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        // --- End Dropzone Initialization ---
+
+
+        // --- Helper Function: Update Bulk Actions (FIXED) ---
+        function updateBulkActions() {
+            // Re-select necessary elements (some might be missing if can_modify is false)
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+            const bulkCopyBtn = document.getElementById('bulkCopyBtn');
+            const bulkCutBtn = document.getElementById('bulkCutBtn');
+            const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+            const bulkCompressBtn = document.getElementById('bulkCompressBtn');
+            const selectedCountSpan = document.getElementById('selectedCount');
+
+            let checkedCount = 0;
+            itemCheckboxes.forEach(cb => {
+                if (cb.checked) {
+                    checkedCount++;
+                }
+            });
+
+            if (selectedCountSpan) {
+                selectedCountSpan.textContent = checkedCount + ' {% trans "items selected" %}';
+            }
+
+            const isDisabled = checkedCount === 0;
+            
+            // FIX: Check if buttons exist before setting properties
+            if (bulkCopyBtn) {
+                bulkCopyBtn.disabled = isDisabled;
+            }
+            if (bulkCutBtn) {
+                bulkCutBtn.disabled = isDisabled;
+            }
+            if (bulkDeleteBtn) {
+                bulkDeleteBtn.disabled = isDisabled;
+            }
+            
+            const bulkDeleteCountElement = document.getElementById('bulkDeleteCount');
+            if (bulkDeleteCountElement) {
+                 bulkDeleteCountElement.textContent = checkedCount;
+            }
+            if (bulkCompressBtn) {
+                bulkCompressBtn.disabled = isDisabled;
+            }
+
+            let allChecked = true;
+            itemCheckboxes.forEach(c => {
+                if (!c.checked) {
+                    allChecked = false;
+                }
+            });
+            
+            // Check if selectAllCheckbox exists before setting its property
+            if (selectAllCheckbox) {
+                selectAllCheckbox.checked = checkedCount > 0 && allChecked;
+            }
+        }
+        // --- End Helper Function ---
+
+
+        // --- Modal Setup: Rename and Delete ---
+        document.getElementById('renameModal').addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const itemPath = button.getAttribute('data-item-path');
+            const itemName = button.getAttribute('data-item-name');
+            
+            const modalOldPath = document.getElementById('renameOldPath');
+            const modalNewName = document.getElementById('renameNewName');
+            
+            if (modalOldPath && modalNewName) {
+                modalOldPath.value = itemPath;
+                modalNewName.value = itemName;
+                modalNewName.select();
+            }
+        });
+
+        document.getElementById('deleteModal').addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const itemPath = button.getAttribute('data-item-path');
+            const itemName = button.getAttribute('data-item-name');
+            const isDir = button.getAttribute('data-is-dir') === 'True';
+            
+            const modalTargetPath = document.getElementById('deleteTargetPath');
+            const modalItemName = document.getElementById('deleteItemName');
+            
+            if (modalTargetPath && modalItemName) {
+                modalTargetPath.value = itemPath;
+                modalItemName.textContent = itemName + (isDir ? ' ({% trans "Folder" %})' : ' ({% trans "File" %})');
+            }
+        });
+        
+        // --- Checkbox and Bulk Action Listeners ---
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+        
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('change', function() {
+                itemCheckboxes.forEach(cb => {
+                    cb.checked = selectAllCheckbox.checked;
+                });
+                updateBulkActions();
+            });
+        }
+
+        itemCheckboxes.forEach(cb => {
+            cb.addEventListener('change', updateBulkActions);
+        });
+
+        // Initialize actions state on load
+        updateBulkActions();
+
+
+        const bulkDeleteModal = document.getElementById('bulkDeleteModal');
+        if (bulkDeleteModal) {
+            bulkDeleteModal.addEventListener('show.bs.modal', function() {
+                const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+                const itemPaths = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
+                document.getElementById('bulkDeleteItemIds').value = itemPaths.join(','); 
+                
+                const currentPathInput = document.querySelector('#bulkActionForm input[name="current_path"]');
+                if (currentPathInput) {
+                    document.getElementById('bulkDeleteCurrentPath').value = currentPathInput.value;
+                }
+
+                document.getElementById('bulkDeleteCount').textContent = itemPaths.length;
+            });
+        }
+
+
+        // --- Folder Icon Double Size Logic (FIXED with preventDefault) ---
+        const folderLinks = document.querySelectorAll('.folder-link');
+        folderLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                
+                // Prevent immediate navigation
+                event.preventDefault(); 
+                
+                const currentCell = this.closest('td');
+                const targetUrl = this.getAttribute('href'); 
+
+                if (!currentCell) {
+                    window.location.href = targetUrl; 
+                    return;
+                }
+                
+                const iconCell = currentCell.previousElementSibling;
+
+                if (!iconCell) {
+                    window.location.href = targetUrl; 
+                    return;
+                }
+                
+                // Look inside the iconCell for the specific folder icon
+                const icon = iconCell.querySelector('.fa-folder');
+                
+                if (icon) {
+                    icon.classList.add('icon-double-size');
+                    
+                    // Navigate after a short delay (300ms matches CSS transition)
+                    setTimeout(() => {
+                        icon.classList.remove('icon-double-size');
+                        window.location.href = targetUrl; 
+                    }, 350); 
+                } else {
+                    // If no folder icon is found, navigate immediately (e.g., if it's a file icon)
+                    window.location.href = targetUrl;
+                }
+            });
+        });
+
+        // --- Add Bulk Compress Modal Listener ---
+        const bulkCompressModal = document.getElementById('bulkCompressModal');
+        if (bulkCompressModal) {
+            bulkCompressModal.addEventListener('show.bs.modal', function() {
+                const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+                const itemPaths = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
+
+                // --- DEBUG LOGS: START ---
+                console.log("DEBUG (JS): Number of selected checkboxes:", selectedCheckboxes.length);
+                console.log("DEBUG (JS): Extracted itemPaths (Array):", itemPaths);
+                // --- DEBUG LOGS: END ---
+
+                const itemPathsInput = document.getElementById('bulkCompressItemIds');
+
+                if (itemPathsInput) {
+                    itemPathsInput.value = itemPaths.join(','); 
+                    console.log("DEBUG (JS): Final item_paths_str sent:", itemPathsInput.value);
+                } else {
+                    console.error("Error: Could not find hidden input #item_paths_input"); 
+                }
+
+                const currentPathValue = document.querySelector('#bulkCompressModal input[name="current_path"]');
+                if (currentPathValue) {
+                    currentPathValue.value = '{{ current_path_encoded }}'; // Ensure the current path is correct
+                }
+
+                document.getElementById('bulkCompressCount').textContent = itemPaths.length;
+
+                const compressButton = document.querySelector('#bulkCompressModal button[type="submit"]');
+                if (compressButton) {
+                    compressButton.disabled = itemPaths.length === 0;
+                }
+
+            });
+        }
+
+        // --- Add Uncompress Modal Listener ---
+        const uncompressModal = document.getElementById('uncompressModal');
+        if (uncompressModal) {
+            uncompressModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const zipPath = button.getAttribute('data-zip-path');
+                const zipName = button.getAttribute('data-zip-name');
+
+                // ⭐ Set the value for the hidden input field
+                const zipPathInput = document.getElementById('uncompressZipPath');
+                if (zipPathInput) {
+                    zipPathInput.value = zipPath;
+                } else {
+                    // Optional: Log an error if the element wasn't found
+                    console.error("Error: Could not find hidden input #uncompressZipPath"); 
+                }
+
+        // Set the visible name for the user confirmation (if you included this part)
+        const zipNameDisplay = document.getElementById('uncompressZipName');
+        if (zipNameDisplay) {
+            zipNameDisplay.textContent = zipName;
+        }
+    });
+}
+
+    }); // End DOMContentLoaded
+</script>
+
+
+{% endblock %}

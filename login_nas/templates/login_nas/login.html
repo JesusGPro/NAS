@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-3">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="title" style="color: #d64161;">Login</h3>
+                  <img src="{% static 'G-Nas.jpg' %}" alt="L7 Layout" class="img-fluid mb-4">
+                  <form action="" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                      <label class="form-label" for="username" style="color: black;">Username</label>
+                      <input type="text" name="username" class="form-control form-control-lg {% if form.username.errors %}is-invalid{% endif %}" {% if form.username.value %} value="{{ form.username.value }}"{% endif %}>
+                      {% if form.username.errors %}
+                        <div class="invalid-feedback">
+                          {{ form.username.errors|join:", " }}
+                        </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="password" style="color: black;">Password</label>
+                      <div class="input-group">
+                        <input type="password" name="password" id="password-field" class="form-control form-control-lg {% if form.password.errors %}is-invalid{% endif %}" {% if form.password.value %} value="{{ form.password.value }}"{% endif %}>
+                        
+                        <span class="input-group-text" id="toggle-password" style="cursor: pointer;">
+                          <i class="fas fa-eye"></i> 
+                        </span>
+
+                        {% if form.password.errors %}
+                          <div class="invalid-feedback">
+                            {{ form.password.errors|join:", " }}
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div><br>
+                    <button id="login" class="btn btn-info btn-lg btn-block">
+                      Login
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById('login');
+    // --- New Code for Password Toggle ---
+    const passwordField = document.getElementById('password-field');
+    const togglePassword = document.getElementById('toggle-password');
+
+    togglePassword.addEventListener('click', function() {
+      // Toggle the type attribute
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      
+      // Toggle the eye icon (fa-eye-slash is the 'eye with a slash' icon)
+      this.querySelector('i').classList.toggle('fa-eye');
+      this.querySelector('i').classList.toggle('fa-eye-slash'); 
+    });
+    // --- End New Code ---
+
+    loginBtn.addEventListener('mouseover', () => {
+      loginBtn.style.backgroundColor = '#b72ed9';
+      loginBtn.style.borderColor = '#2e6da4';
+      loginBtn.style.color = '#ffffff';
+    });
+
+    loginBtn.addEventListener('mouseout', () => {
+      loginBtn.style.backgroundColor = ''; // reset to original color
+      loginBtn.style.borderColor = ''; // reset to original color
+      loginBtn.style.color = ''; // reset to original color
+    });
+  </script>
+{% endblock %}

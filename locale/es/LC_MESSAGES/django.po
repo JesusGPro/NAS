@@ -1,0 +1,806 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-05 16:22+0300\n"
+"PO-Revision-Date: 2025-10-22 12:30+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: drives/templates/drives/disk_status.html:4
+msgid "Hard Drive Status"
+msgstr "Estado del Disco Duro"
+
+#: drives/templates/drives/disk_status.html:8
+msgid "System Disk Status"
+msgstr "Estado del Disco del Sistema"
+
+#: drives/templates/drives/disk_status.html:12
+msgid "Running on"
+msgstr "Corriendo en"
+
+#: drives/templates/drives/disk_status.html:12
+msgid "This data reflects your current machine."
+msgstr "Esto refleja los datos de tu ordenador."
+
+#: drives/templates/drives/disk_status.html:18
+msgid "Detected Disk Partitions"
+msgstr "Particiones de Disco Detectadas"
+
+#: drives/templates/drives/disk_status.html:24
+msgid "Device / Mount Point"
+msgstr "Dispositivo / Punto de Montaje"
+
+#: drives/templates/drives/disk_status.html:25
+msgid "Total (GB)"
+msgstr "Total (GB)"
+
+#: drives/templates/drives/disk_status.html:26
+msgid "Used (GB)"
+msgstr "Usado (GB)"
+
+#: drives/templates/drives/disk_status.html:27
+msgid "Free (GB)"
+msgstr "Libre (GB)"
+
+#: drives/templates/drives/disk_status.html:28
+msgid "Usage"
+msgstr "Uso"
+
+#: drives/templates/drives/disk_status.html:72
+msgid "No disk partitions could be detected or read."
+msgstr "No se pudieron detectar o leer particiones de disco."
+
+#: drives/templates/drives/drive_content.html:4 templates/base.html:77
+msgid "Drive Content"
+msgstr "Contenido del Disco"
+
+#: drives/templates/drives/drive_content.html:15
+msgid "File Explorer"
+msgstr "Explorador de Archivos"
+
+#: drives/templates/drives/drive_content.html:21
+msgid "Drives"
+msgstr "Discos"
+
+#: drives/templates/drives/drive_content.html:27
+msgid "..."
+msgstr "..."
+
+#: drives/templates/drives/drive_content.html:41
+msgid "Create Folder"
+msgstr "Crear carpeta"
+
+#: drives/templates/drives/drive_content.html:44
+#: drives/templates/drives/drive_content.html:315
+msgid "Upload Folder"
+msgstr "Subir carpeta"
+
+#: drives/templates/drives/drive_content.html:53
+msgid "Paste Items Here"
+msgstr "Pega los archivos o carpetas aquí."
+
+#: drives/templates/drives/drive_content.html:54
+msgid "Paste"
+msgstr "Pega"
+
+#: drives/templates/drives/drive_content.html:54
+msgid "items"
+msgstr "items"
+
+#: drives/templates/drives/drive_content.html:61
+msgid "Upload File"
+msgstr "Subir Archivo"
+
+#: drives/templates/drives/drive_content.html:76
+msgid "Start Upload"
+msgstr "Comenzar subida"
+
+#: drives/templates/drives/drive_content.html:80
+msgid ""
+"Select a file and click 'Start Upload' to save it to the current directory."
+msgstr ""
+"Selecciona un archivo y haz click en 'Comienza subida' para guardar en el "
+"directorio actual."
+
+#: drives/templates/drives/drive_content.html:87
+msgid ""
+"Permission denied: You do not have permission to upload files to this "
+"directory."
+msgstr ""
+"Permiso denegado: No tienes permiso para suber archivos a este directorio."
+
+#: drives/templates/drives/drive_content.html:100
+msgid "Selected"
+msgstr "Seleccionado"
+
+#: drives/templates/drives/drive_content.html:101
+msgid "Copy"
+msgstr "Copiar"
+
+#: drives/templates/drives/drive_content.html:102
+msgid "Cut"
+msgstr "Cortar"
+
+#: drives/templates/drives/drive_content.html:103
+#: drives/templates/drives/drive_content.html:184
+msgid "Delete"
+msgstr "Eliminar"
+
+#: drives/templates/drives/drive_content.html:104
+#: drives/templates/drives/drive_content.html:363
+msgid "Compress"
+msgstr "Comprimir"
+
+#: drives/templates/drives/drive_content.html:107
+#: drives/templates/drives/drive_content.html:515
+msgid "items selected"
+msgstr "Elementos selccionados"
+
+#: drives/templates/drives/drive_content.html:119
+msgid "Type"
+msgstr "Tipo"
+
+#: drives/templates/drives/drive_content.html:120
+msgid "Name"
+msgstr "Nombre"
+
+#: drives/templates/drives/drive_content.html:121
+msgid "Size"
+msgstr "Tamaño"
+
+#: drives/templates/drives/drive_content.html:122
+msgid "Last Modified"
+msgstr "Última modificación"
+
+#: drives/templates/drives/drive_content.html:123
+msgid "Actions"
+msgstr "Acciones"
+
+#: drives/templates/drives/drive_content.html:131
+msgid "Parent Directory"
+msgstr "Directorio Superior"
+
+#: drives/templates/drives/drive_content.html:166
+msgid "Download"
+msgstr "Descargar"
+
+#: drives/templates/drives/drive_content.html:170
+msgid "Download File"
+msgstr "Descargar archivo"
+
+#: drives/templates/drives/drive_content.html:176
+#: drives/templates/drives/drive_content.html:255
+msgid "Rename"
+msgstr "Renombrar"
+
+#: drives/templates/drives/drive_content.html:192
+msgid "Uncompress Here"
+msgstr "Descomprimir aquí"
+
+#: drives/templates/drives/drive_content.html:201
+msgid "This folder is empty."
+msgstr "Esta carpeta está vacía."
+
+#: drives/templates/drives/drive_content.html:218
+msgid "Create New Folder"
+msgstr "Crear nueva carpeta"
+
+#: drives/templates/drives/drive_content.html:223
+msgid "Folder Name"
+msgstr "Carpeta"
+
+#: drives/templates/drives/drive_content.html:228
+#: drives/templates/drives/drive_content.html:254
+#: drives/templates/drives/drive_content.html:277
+#: drives/templates/drives/drive_content.html:301
+#: drives/templates/drives/drive_content.html:362
+#: drives/templates/drives/drive_content.html:386
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: drives/templates/drives/drive_content.html:229
+msgid "Create"
+msgstr "Crear"
+
+#: drives/templates/drives/drive_content.html:243
+msgid "Rename Item"
+msgstr "Renombrar item"
+
+#: drives/templates/drives/drive_content.html:249
+msgid "New Name"
+msgstr "Nuevo nombre"
+
+#: drives/templates/drives/drive_content.html:269
+msgid "Confirm Deletion"
+msgstr "Confirma borrar"
+
+#: drives/templates/drives/drive_content.html:273
+msgid "Are you sure you want to delete"
+msgstr "¿Estás seguro que quieres borrar?"
+
+#: drives/templates/drives/drive_content.html:273
+msgid "This action cannot be undone."
+msgstr "Esta acción no se pueder revertir."
+
+#: drives/templates/drives/drive_content.html:274
+msgid "Note: If this is a folder, all contents will be permanently removed."
+msgstr ""
+"Nota: si esto es una carpeta, todo el contenido será borrado permanentemente."
+
+#: drives/templates/drives/drive_content.html:278
+#: drives/templates/drives/drive_content.html:303
+msgid "Delete Permanently"
+msgstr "Borrar permanantemente"
+
+#: drives/templates/drives/drive_content.html:291
+msgid "Confirm Bulk Deletion"
+msgstr "Confirma el borrado de todos los elemento(s)"
+
+#: drives/templates/drives/drive_content.html:295
+msgid "Are you sure you want to delete the **"
+msgstr "Estas seguro que quieres borrar **"
+
+#: drives/templates/drives/drive_content.html:295
+msgid " selected items?** This action cannot be undone."
+msgstr "¿Elmentos seleccionados?** Esta acción no es reversible."
+
+#: drives/templates/drives/drive_content.html:296
+msgid "Note: Folders and their contents will be permanently removed."
+msgstr "Nota: Las carpetas y sus contenidos serán borrados permanantemente."
+
+#: drives/templates/drives/drive_content.html:322
+msgid "Drag and drop the entire folder here."
+msgstr "Arrastra toda la carpeta aquí."
+
+#: drives/templates/drives/drive_content.html:333
+msgid "Uploaded Folder"
+msgstr "Subir carpeta"
+
+#: drives/templates/drives/drive_content.html:337
+msgid "Close"
+msgstr "Cerrar"
+
+#: drives/templates/drives/drive_content.html:350
+msgid "Confirm Compression"
+msgstr "Confirma compresión"
+
+#: drives/templates/drives/drive_content.html:354
+msgid "Are you sure you want to compress the following"
+msgstr "Estas seguro que quieres comprimir lo siguiente"
+
+#: drives/templates/drives/drive_content.html:355
+msgid "item(s)"
+msgstr "item(s)"
+
+#: drives/templates/drives/drive_content.html:356
+msgid "A new .zip file will be created in the current directory."
+msgstr "Un nuevo archivo .zip será creado en el directorio actual."
+
+#: drives/templates/drives/drive_content.html:376
+msgid "Confirm Uncompression"
+msgstr "Confirma descompresión"
+
+#: drives/templates/drives/drive_content.html:380
+msgid "Are you sure you want to extract the contents of"
+msgstr "Estas seguro que quieres extraer el contenido de"
+
+#: drives/templates/drives/drive_content.html:380
+msgid "into the current directory?"
+msgstr "¿En el directorio actual?"
+
+#: drives/templates/drives/drive_content.html:387
+msgid "Uncompress"
+msgstr "Descomprimir"
+
+#: drives/templates/drives/drive_content.html:420
+msgid "Drag and drop files/folders here"
+msgstr "Arrastra y deja archivos/carpetas aquí"
+
+#: drives/templates/drives/drive_content.html:453
+msgid "Complete"
+msgstr "Completar"
+
+#: drives/templates/drives/drive_content.html:472 drives/views.py:380
+msgid "Error"
+msgstr "Error"
+
+#: drives/templates/drives/drive_content.html:581
+msgid "Folder"
+msgstr "Carpeta"
+
+#: drives/templates/drives/drive_content.html:581
+msgid "File"
+msgstr "Archivo"
+
+#: drives/templates/drives/index.html:4
+msgid "Inside NAS"
+msgstr "Dentro del NAS"
+
+#: drives/templates/drives/index.html:47
+msgid "4x 1TB NAS Status"
+msgstr "Estado del NAS 4x 1TB"
+
+#: drives/templates/drives/index.html:74
+msgid "Previous"
+msgstr "Anterior"
+
+#: drives/templates/drives/index.html:78
+msgid "Next"
+msgstr "Siguiente"
+
+#: drives/templates/drives/index.html:88
+msgid "Author"
+msgstr "Autor"
+
+#: drives/templates/drives/index.html:88
+msgid "October 2025"
+msgstr "Octubre 2025"
+
+#: drives/views.py:112
+msgid "Invalid folder name."
+msgstr "Nombre de carpeta incorrecto."
+
+#: drives/views.py:117 drives/views.py:129
+msgid "Operation denied: Path traversal detected."
+msgstr "Acción denegada: detectado camino transversal."
+
+#: drives/views.py:124
+msgid "Permission denied: You cannot create a folder in this location."
+msgstr "Permiso denegado: no puedes crear una carpeta en esta localización."
+
+#: drives/views.py:135
+#, python-format
+msgid "A folder named '%(name)s' already exists."
+msgstr "Una carpeta llamada '%(name)s' ya existe."
+
+#: drives/views.py:142
+#, python-format
+msgid "Folder '%(name)s' created successfully at: '%(path)s'"
+msgstr "La carpeta '%(name)s' ha sido creada con éxito en: '%(path)s'"
+
+#: drives/views.py:146
+#, python-format
+msgid "Failed to create folder: '%(e)s'"
+msgstr "Fallo al crear la carpeta: '%(e)s'"
+
+#: drives/views.py:165
+msgid "Permission denied: You cannot download this folder."
+msgstr "Permiso denegado"
+
+#: drives/views.py:172
+msgid "Invalid folder path or item does not exist."
+msgstr "Camino de carpeta incorrecta o elemento inexistente."
+
+#: drives/views.py:204
+#, python-format
+msgid "Failed to create or stream the download: '%(e)s'"
+msgstr "Error para crear la descarga: '%(e)s'"
+
+#: drives/views.py:241
+msgid "Permission denied."
+msgstr "Permiso denegado."
+
+#: drives/views.py:381
+msgid "N/A"
+msgstr "N/A"
+
+#: drives/views.py:385 drives/views.py:536
+msgid "Root"
+msgstr "Raíz"
+
+#: drives/views.py:405
+msgid "Invalid path provided. Redirected to root."
+msgstr "Camino equivocado. Redireccion a la raíz."
+
+#: drives/views.py:417
+msgid "Access outside of the designated root directory is forbidden."
+msgstr "Acceso fura del directorio designado "
+
+#: drives/views.py:431
+msgid "Access denied: You do not have permission to view this content."
+msgstr "Acceso denegado: No tienes permiso para ver este contenido."
+
+#: drives/views.py:450
+msgid "File not found"
+msgstr "Archivo no encontrado"
+
+#: drives/views.py:452
+msgid "Could not download file."
+msgstr "No se pudo descargar el archivo."
+
+#: drives/views.py:522
+msgid "Permission denied to access this directory."
+msgstr "Permiso denegado para acceder a este directorio."
+
+#: drives/views.py:527
+#, python-format
+msgid "Error listing directory content: '%(e)s'"
+msgstr "Error al mostar el contenido del directorio: '%(e)s'"
+
+#: drives/views.py:543
+msgid "Path not found"
+msgstr "Camino no encontrado"
+
+#: drives/views.py:565 drives/views.py:623 drives/views.py:669
+#: drives/views.py:728 drives/views.py:952 drives/views.py:1044
+msgid "Permission denied: You cannot modify content in this location."
+msgstr ""
+"Permiso denegado: No puedes modificar el contenido en esta localización."
+
+#: drives/views.py:571
+msgid "Invalid upload path: Attempted to upload outside the drive boundary."
+msgstr ""
+"Camino se subida incorrecto: Intento de subida fuera del entorno del disco."
+
+#: drives/views.py:583
+#, python-format
+msgid "File '%(file_name)s' uploaded successfully."
+msgstr "Archivo '%(file_name)s' subido con éxito."
+
+#: drives/views.py:586
+#, python-format
+msgid "Failed to save file: '%(e)s'"
+msgstr "Error al salvar el archivo: '%(e)s'"
+
+#: drives/views.py:590
+msgid "Upload failed: Target directory is invalid or file is missing."
+msgstr "Fallo la subida: El destino del archivo es erroneo o falta el archivo."
+
+#: drives/views.py:609
+msgid "New name cannot be empty."
+msgstr "El nuevo nombre no puede estar vacío."
+
+#: drives/views.py:628
+msgid "New name contains illegal characters (e.g., '..' or starts with '.')."
+msgstr ""
+"El nombre nuevo contiene charácteres ilegales (por ejemplo .. or comienza "
+"por . )."
+
+#: drives/views.py:631
+msgid "Target path is outside the allowed drive boundary."
+msgstr "El camino está fuera del entorno permitido del disco."
+
+#: drives/views.py:635
+#, python-format
+msgid "An item named '%(new_name)s' already exists in this location."
+msgstr "Un elemento llamado '%(new_name)s' ya existe en esta localización."
+
+#: drives/views.py:643
+#, python-format
+msgid "Item successfully renamed from '%(old_name)s' to '%(new_name)s'."
+msgstr ""
+"El elemento ha sido renombrado con éxito de '%(old_name)s' a '%(new_name)s'."
+
+#: drives/views.py:646
+#, python-format
+msgid "Failed to rename item: '%(e)s'"
+msgstr "Falló el renombare el elemento: '%(e)s'"
+
+#: drives/views.py:674
+msgid "Deletion of the root directory or outside boundary is not allowed."
+msgstr ""
+"La eliminación del directorio raíz o fuera del entorno no está permitido."
+
+#: drives/views.py:684
+#, python-format
+msgid "File '%(item_name)s' deleted successfully."
+msgstr "Archivo '%(item_name)s' borrado con éxito."
+
+#: drives/views.py:689
+#, python-format
+msgid "Folder '%(item_name)s' and its contents deleted successfully."
+msgstr "La carpeta '%(item_name)s' y su contenido borrado con éxito."
+
+#: drives/views.py:692
+#, python-format
+msgid "Item at '%(path)s' does not exist or is not a file/directory."
+msgstr "El elemento en '%(path)s' no existe o no es un archivo o directorio."
+
+#: drives/views.py:696
+#, python-format
+msgid "Permission denied: Could not delete '%(item_name)s'."
+msgstr "Permiso denegado: No se pudo borrar '%(item_name)s'."
+
+#: drives/views.py:699
+#, python-format
+msgid "Failed to delete item: '%(e)s'"
+msgstr "Fallo el borrado del elemento: '%(e)s'"
+
+#: drives/views.py:718
+msgid "No items were selected for deletion."
+msgstr "No se eligión ningún elemento para su borrado."
+
+#: drives/views.py:763
+#, python-format
+msgid "Successfully deleted '%(count)s' item(s)."
+msgstr "Borrado con éxito el item: '%(count)s'."
+
+#: drives/views.py:767
+#, python-format
+msgid "Failed to delete the following items: '%(names)s'"
+msgstr "Falló el borrado del siguiente elemento(s): '%(names)s'"
+
+#: drives/views.py:782
+msgid "No items were selected for copying."
+msgstr "No se eligión ningún elemento para ser copiado."
+
+#: drives/views.py:792
+#, python-format
+msgid ""
+"Ready to copy '%(count)s' item(s). Navigate to the target folder and click "
+"Paste."
+msgstr ""
+"Preparado para copiar '%(count)s' elemento(s). Navega al sitio de la carpeta "
+"y haz click en pegar."
+
+#: drives/views.py:806
+msgid "No items were selected for cutting."
+msgstr "No se eligión ningún elemento para ser cortado."
+
+#: drives/views.py:816
+#, python-format
+msgid ""
+"Ready to move '%(count)s' item(s). Navigate to the target folder and click "
+"Paste."
+msgstr ""
+"Preparado para mover '%(count)s' elemento(s). Navega al sitio de la carpeta "
+"y haz click en pegar."
+
+#: drives/views.py:831
+msgid "No items were selected for paste operation or session expired."
+msgstr "No seleccionón ningún elemento para pegar o la sesión expiró."
+
+#: drives/views.py:844
+msgid "Permission denied: You cannot modify content in the target location."
+msgstr ""
+"Permiso denegado: No puedes modificar el contenido en esta localización."
+
+#: drives/views.py:863
+#, python-format
+msgid "Skipped: Cannot move/copy '%(name)s' into itself or its sub-directory."
+msgstr "No se puede mover/copiar '%(name)s' en sí mismo o en un subdirectorio."
+
+#: drives/views.py:874
+#, python-format
+msgid "Skipped: Item named '%(name)s' already exists in the target location."
+msgstr "El elemento '%(name)s' ya existe en esta localización."
+
+#: drives/views.py:896
+msgid "copied"
+msgstr "copiado"
+
+#: drives/views.py:896
+msgid "moved"
+msgstr "movido"
+
+#: drives/views.py:900
+#, python-format
+msgid "Successfully '%(operation)s' '%(count)s' item(s) to the new location."
+msgstr ""
+"Exito en '%(operation)s' '%(count)s' elemento(s) en la nueva localización."
+
+#: drives/views.py:902
+#, python-format
+msgid ""
+"'%(success_count)s' item(s) successfully '%(operation)s', but "
+"'%(fail_count)s' item(s) failed."
+msgstr ""
+"'%(success_count)s' elemento(s) con exito en '%(operation)s', pero "
+"'%(fail_count)s' elemento(s) fallaron."
+
+#: drives/views.py:904
+msgid "The operation failed for all selected items."
+msgstr "Fallo para todos los elementos seleccionados."
+
+#: drives/views.py:941
+#, 
+msgid "No valid files or folders were selected for compression."
+msgstr "No se han encontrado archivos o carpetas válidad que comprimir."
+
+#: drives/views.py:948
+msgid "Internal Error: Permission check not available."
+msgstr "Error interno: Comprobación de permisos no disponible."
+
+#: drives/views.py:1015
+#, python-format
+msgid "Successfully compressed %(count)s item(s) into '%(filename)s'."
+msgstr "Borrado con éxito los item(s)'%(count)s' en '%(filename)s'."
+
+#: drives/views.py:1020
+msgid "No valid files or folders were found to compress."
+msgstr "No se han encontrado archivos o carpetas válidad que comprimir."
+
+#: drives/views.py:1026
+#, 
+msgid "Compression failed: '%(e)s'"
+msgstr "La compresión falló: '%(e)s'"
+
+#: drives/views.py:1054
+msgid "The specified file is not a valid ZIP archive or does not exist."
+msgstr "El archivo especificado no es un ZIP válido o no existe."
+
+#: drives/views.py:1074
+#, python-format
+msgid ""
+"Successfully extracted '%(count)s' files/folders from '%(filename)s' into the "
+"folder: '%(folder_name)s'."
+msgstr ""
+"Extraido(s) '%(count)s' archivos/carpetas de '%(filename)s' en la carpeta: "
+"'%(folder_name)s' con éxito."
+
+#: drives/views.py:1082
+msgid "The ZIP file was successfully read but contained no files."
+msgstr "The archivo ZIP fue leído con éxito pero no contiene archivos."
+
+#: drives/views.py:1085
+msgid ""
+"Extraction failed due to **insufficient file system permissions**. The "
+"server cannot write to this location."
+msgstr ""
+"La extración fallo debido a **insuficientes permisos de archivo**. El  "
+"servidor no puede escribir en esta localización."
+
+#: drives/views.py:1087
+msgid "Extraction failed: The ZIP file is corrupted or not a valid archive."
+msgstr ""
+"La extración fallo: el archivo ZIP está corrupto o no es un archivo válido."
+
+#: drives/views.py:1089
+#, python-format
+msgid "An unknown error occurred during extraction: %s"
+msgstr "Un error desconocido ocurrión durante la extracción: %s"
+
+#: nas_manager/settings.py:133
+msgid "English"
+msgstr "Inglés"
+
+#: nas_manager/settings.py:134
+msgid "Spanish"
+msgstr "Español"
+
+#: templates/base.html:8
+msgid "NAS Manager"
+msgstr "Gestor de NAS"
+
+#: templates/base.html:52 templates/base.html:135
+msgid "My NAS"
+msgstr "Mi NAS"
+
+#: templates/base.html:72
+msgid "DisK Status"
+msgstr "Estado del Disco"
+
+#: templates/base.html:82
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: templates/base.html:88
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: templates/base.html:138
+msgid "2025 Designed by Jesus Maria Garcia Pro. All rights reserved."
+msgstr ""
+"2025 Desarrollado por Jesus Maria Garcia Pro. Todos los derechos reservados."
+
+#~ msgid "Invalid or empty folder name provided."
+#~ msgstr "Nombre vacío o erroneo"
+
+#~ msgid "No files or folder selected for upload."
+#~ msgstr "No se pudieron detectar o leer particiones de disco."
+
+#~ msgid "Security boundary violation detected."
+#~ msgstr "Violación del entorno de seguridad detectado."
+
+#~ msgid "Upload failed: No files found for processing."
+#~ msgstr ""
+#~ "Fallo la subida: El destino del archivo es erroneo o falta el archivo."
+
+#, python-format
+#~ msgid "Failed to create the root folder: '%(e)s'"
+#~ msgstr "Error para crear la carpeta raíz: '%(e)s'"
+
+#, python-format
+#~ msgid ""
+#~ "Folder '%(folder_name)s' created and '%(count)s' files uploaded "
+#~ "successfully."
+#~ msgstr ""
+#~ "Carpeta '%(folder_name)s' creada y '%(count)s' archivos subidos con éxito."
+
+#, python-format
+#~ msgid ""
+#~ "'%(success_count)s' files successfully uploaded to folder "
+#~ "'%(folder_name)s', but '%(fail_count)s' failed."
+#~ msgstr ""
+#~ "'%(success_count)s' archivos subidos a la carpeta '%(folder_name)s' con "
+#~ "éxito.pero '%(fail_count)s' fallaron."
+
+#~ msgid "The upload operation failed for all selected files."
+#~ msgstr "Fallo para todos los elementos seleccionados."
+
+#~ msgid ""
+#~ "Select the folder you wish to upload. The entire structure and all files "
+#~ "inside will be preserved."
+#~ msgstr ""
+#~ "Selecciona la carpeta que deseas subir, la estructura entera y todos los "
+#~ "archivos serán conservados."
+
+#~ msgid "Select Folder Content"
+#~ msgstr "Seleccionar contenido de la carpeta"
+
+#~ msgid "Upload"
+#~ msgstr "Subir"
+
+#, python-brace-format
+#~ msgid "File '%(file.name)s' uploaded successfully."
+#~ msgstr "Archivo '%(file_name)s' subido con éxito."
+
+#, python-brace-format
+#~ msgid "Failed to save file: {e}"
+#~ msgstr "Error al salvar el archivo: {e}"
+
+#, python-format
+#~ msgid "An item named '%{new_name}s' already exists in this location."
+#~ msgstr "Un elemento llamado '%(new_name)s' ya existe en esta localización."
+
+#, python-format
+#~ msgid "Item successfully renamed from '%{old_name}s' to '%{new_name}s'."
+#~ msgstr ""
+#~ "El elemento ha sido renombrado con éxito de '%(old_name)s' a "
+#~ "'%(new_name)s'."
+
+#, python-format
+#~ msgid "Failed to rename item: %{e}s"
+#~ msgstr "Falló el renombare el elemento: %(e)s"
+
+#, python-format
+#~ msgid "File '%{item_name}'s deleted successfully."
+#~ msgstr "Archivo '%(item_name)s' borrado con éxito."
+
+#, python-format
+#~ msgid "Folder '%{item_name}s' and its contents deleted successfully."
+#~ msgstr "La carpeta '%(item_name)s' y su contenido borrado con éxito."
+
+#, python-format
+#~ msgid ""
+#~ "Item at '%{decoded_target_path}s' does not exist or is not a file/"
+#~ "directory."
+#~ msgstr ""
+#~ "El elemento en '%(decoded_target_path)s' no existe o no es un archivo o "
+#~ "directorio."
+
+#, python-format
+#~ msgid "Permission denied: Could not delete '%{item_name}s'."
+#~ msgstr "Permiso denegado: No se pudo borrar '%(item_name)s'."
+
+#~ msgid "Permission denied: You cannot upload content in this location."
+#~ msgstr ""
+#~ "Permiso denegado: tu no puedes subir contenido en esta localización."
+
+#, python-format
+#~ msgid "Folder upload failed for a file: '%(e)s'"
+#~ msgstr "Falló el subir la carpeta por el archivo: '%(e)s'"
+
+#~ msgid "The upload operation failed."
+#~ msgstr "La operación de subida falló."
+
+#~ msgid "Contents of"
+#~ msgstr "Contenido de"
+
+#~ msgid ".. (Go Up)"
+#~ msgstr ".. (Subir Nivel)"
+
+#~ msgid "Upload file"
+#~ msgstr "Subir archivo"
