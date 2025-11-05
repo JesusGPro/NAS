@@ -66,7 +66,7 @@ ufw status
     a) sudo nano /etc/nginx/sites-available/nas_manager
     server {
         listen 8080;
-        server_name jgpro-server.org raspberrypi-jesus 172.31.126.24 10.253.10.1;
+        server_name xxxxx.com xxxxxx  xxxxxxxxx;
 
         location = /favicon.ico { access_log off; log_not_found off; }
         location /static/ {
